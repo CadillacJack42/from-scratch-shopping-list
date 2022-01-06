@@ -21,12 +21,25 @@
     </header>    
     <button id="logout">Logout</button>
     <main>
-        <h1>You are logged in!</h1>
+        <h1>Create a shopping list</h1>
+        <h3>Add Items To Your List Here</h3>
+        <form id="add-item">
+            <label>
+                Quantity
+                <input type="number" name="quantity" id="item-quantity" min="0">
+            </label>
+            <label>
+                Item Name
+                <input type="text" name="name" id="item-name" placeholder="ex: Eggs">
+            </label>
+            <button type="submit" id="item-submit">Add Item</button>
+        </form>
+        <div id="list-container"></div>
     </main>
     <footer>
         <div class="copy gutter-right">&copy; 2021 Alchemy Code Lab</div>
     </footer>
-    <script type="module" src="./other-page.js"></script>
+    <script type="module" src="./shopping-list.js"></script>
 </body>
 
 </html>
