@@ -52,6 +52,9 @@ export const getItems = async() => {
     const response = await client
         .from('shopping_list')
         .select();
+    // for (const res of response.data) {
+    //     console.log(res.created_at);
+    // }
     return checkError(response);
 };
 
@@ -85,3 +88,26 @@ export const removeSingleItem = async(item) => {
         .match({ id: item.id });
     return checkError(response);
 };
+
+const getTime = async() => {
+    const items = await getItems();
+    for (const item of items) {
+        const timeStamp = JSON.stringify(item.created_at);
+        console.log(timeStamp);
+        const cleanTime = [];
+        let places = '';
+        for (let i = 12; i < 17; i++) {
+            const element = timeStamp[i];
+            if (element !== ':') {
+                places += element;
+            } else {
+                cleanTime.push(places);
+                places = '';
+            }
+        }
+        cleanTime.push(places);
+        console.log(cleanTime);
+    }
+};
+
+

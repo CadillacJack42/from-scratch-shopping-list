@@ -1,9 +1,12 @@
 import { checkAuth, createItem, deleteAllItems, logout } from '../fetch-utils.js';
 import { displayShoppingListItems } from '../render-utils/render.js';
+import { countDown } from '../timer/timer.js';
 
 const addItemForm = document.getElementById('add-item');
 
 const clearList = document.getElementById('clear-all');
+
+const timer = document.getElementById('timer');
 
 checkAuth();
 
@@ -36,4 +39,6 @@ clearList.addEventListener('click', async() => {
     await deleteAllItems();
     await displayShoppingListItems();
 });
+
+countDown(1);
 
