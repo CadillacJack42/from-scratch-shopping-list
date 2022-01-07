@@ -1,12 +1,11 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://cmewyjgphfnmytfmmpjy.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MDAxOTY4MywiZXhwIjoxOTU1NTk1NjgzfQ.0WT-gqj-qvV0wYfg0QdblxbkS4J4rIq0wf8BI3R45yc';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export async function getUser() {
     return client.auth.session();
 }
-
 
 export async function checkAuth() {
     const user = await getUser();
@@ -16,7 +15,7 @@ export async function checkAuth() {
 
 export async function redirectIfLoggedIn() {
     if (await getUser()) {
-        location.replace('./other-page');
+        location.replace('./shopping-list');
     }
 }
 
@@ -41,3 +40,34 @@ export async function logout() {
 function checkError({ data, error }) {
     return error ? console.error(error) : data;
 }
+
+export const createItem = async(item) => {
+    const response = await client
+        .from('shopping_list')
+        .insert([item]);
+    return checkError(response);
+};
+
+export const getItems = async() => {
+    const response = await client
+        .from('shopping_list')
+        .select();
+    console.log(response);
+    return checkError(response);
+};
+
+export const buyItem = async(id) => {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: true })
+        .match({ id });
+
+    return checkError(response);
+};
+
+export const deleteAllItems = async() => {
+    const response = await client 
+        .from('shopping_list')
+        .delete();
+    return checkError(response);
+};
