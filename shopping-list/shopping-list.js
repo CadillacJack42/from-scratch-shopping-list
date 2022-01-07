@@ -1,4 +1,4 @@
-import { checkAuth, createItem, logout } from '../fetch-utils.js';
+import { checkAuth, createItem, logout, getItems } from '../fetch-utils.js';
 
 const addItemForm = document.getElementById('add-item');
 const itemQuantity = document.getElementById('item-quantity');
@@ -15,7 +15,7 @@ logoutButton.addEventListener('click', () => {
 });
 
 addItemForm.addEventListener('submit', async(e) => {
-    e.preventDefault()
+    e.preventDefault();
     const newRow = new FormData(addItemForm);
     const quantity = newRow.get('quantity');
     const name = newRow.get('name');
@@ -25,4 +25,7 @@ addItemForm.addEventListener('submit', async(e) => {
         item: name,
     };
     await createItem(item);
+    addItemForm.reset();
 });
+
+getItems();

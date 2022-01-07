@@ -7,7 +7,6 @@ export async function getUser() {
     return client.auth.session();
 }
 
-
 export async function checkAuth() {
     const user = await getUser();
 
@@ -49,8 +48,10 @@ export const createItem = async(item) => {
     return checkError(response);
 };
 
-// const { data, error } = await supabase
-//   .from('shopping_list')
-//   .insert([
-//     { some_column: 'someValue', other_column: 'otherValue' },
-//   ])
+export const getItems = async() => {
+    const response = await client
+        .from('shopping_list')
+        .select();
+    console.log(response);
+    return checkError(response);
+};
