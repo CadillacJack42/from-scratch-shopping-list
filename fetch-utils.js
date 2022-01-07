@@ -52,15 +52,21 @@ export const getItems = async() => {
     const response = await client
         .from('shopping_list')
         .select();
-    console.log(response);
     return checkError(response);
 };
 
-export const buyItem = async(id) => {
+export const buyItem = async(item) => {
+    let bool;
+    if (item.bought) {
+        bool = false;
+    } else {
+        bool = true;
+    }
+
     const response = await client
         .from('shopping_list')
-        .update({ bought: true })
-        .match({ id });
+        .update({ bought: bool })
+        .match({ id: item.id });
 
     return checkError(response);
 };
@@ -69,5 +75,13 @@ export const deleteAllItems = async() => {
     const response = await client 
         .from('shopping_list')
         .delete();
+    return checkError(response);
+};
+
+export const removeSingleItem = async(item) => {
+    const response = await client
+        .from('shopping_list')
+        .delete()
+        .match({ id: item.id });
     return checkError(response);
 };
