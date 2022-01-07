@@ -42,4 +42,15 @@ function checkError({ data, error }) {
     return error ? console.error(error) : data;
 }
 
-export Const createItem(item)
+export const createItem = async(item) => {
+    const response = await client
+        .from('shopping_list')
+        .insert([item]);
+    return checkError(response);
+};
+
+// const { data, error } = await supabase
+//   .from('shopping_list')
+//   .insert([
+//     { some_column: 'someValue', other_column: 'otherValue' },
+//   ])
