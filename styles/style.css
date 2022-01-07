@@ -129,3 +129,20 @@ footer {
 .auth-container button {
     margin: 10px;
 }
+
+#list-container {
+    margin: 15px auto;
+}
+
+.no-margin {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.no-margin p {
+    padding: 5px;
+}
