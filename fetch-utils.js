@@ -55,3 +55,12 @@ export const getItems = async() => {
     console.log(response);
     return checkError(response);
 };
+
+export const buyItem = async(item) => {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: true })
+        .match({ id: item.id });
+
+    return checkError(response);
+};

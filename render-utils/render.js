@@ -1,4 +1,4 @@
-import { getItems } from '../fetch-utils.js';
+import { buyItem, getItems } from '../fetch-utils.js';
 
 const listContainerEl = document.getElementById('list-container');
 
@@ -6,13 +6,19 @@ const listContainerEl = document.getElementById('list-container');
 export const renderItem = (item) => {
     const itemDiv = document.createElement('div');
     itemDiv.classList.add('no-margin');
+    
+    if (item.bought) {
+        itemDiv.classList.add('bought');
+    }
+
     const itemQuantityEl = document.createElement('span');
+    
     const itemNameEl = document.createElement('p');
+    itemNameEl.classList.add('no-margin');
     
     itemQuantityEl.textContent = item.quantity;
-
     itemNameEl.textContent = item.item;
-    itemNameEl.classList.add('no-margin');
+
 
     itemDiv.append(itemQuantityEl, itemNameEl);
 
@@ -28,5 +34,13 @@ export const displayShoppingListItems = async() => {
         const itemEl = renderItem(item);
 
         listContainerEl.append(itemEl);
+        listenerGenerator(itemEl, item);
     }
+};
+
+const listenerGenerator = (itemDiv, item) => {
+    itemDiv.addEventListener('click', async() => {
+        await buyItem(item);
+        await displayShoppingListItems();
+    });
 };

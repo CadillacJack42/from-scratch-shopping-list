@@ -2,10 +2,8 @@ import { checkAuth, createItem, logout } from '../fetch-utils.js';
 import { displayShoppingListItems } from '../render-utils/render.js';
 
 const addItemForm = document.getElementById('add-item');
-// const itemQuantity = document.getElementById('item-quantity');
-// const itemName = document.getElementById('item-name');
 
-// const listContainerEl = document.getElementById('list-container');
+const clearList = document.getElementById('clear-all');
 
 checkAuth();
 
@@ -13,6 +11,10 @@ const logoutButton = document.getElementById('logout');
 
 logoutButton.addEventListener('click', () => {
     logout();
+});
+
+window.addEventListener('load', async() => {
+    displayShoppingListItems();
 });
 
 addItemForm.addEventListener('submit', async(e) => {
@@ -29,5 +31,5 @@ addItemForm.addEventListener('submit', async(e) => {
     addItemForm.reset();
     await displayShoppingListItems();
 });
-displayShoppingListItems();
+
 
