@@ -56,11 +56,18 @@ export const getItems = async() => {
     return checkError(response);
 };
 
-export const buyItem = async(item) => {
+export const buyItem = async(id) => {
     const response = await client
         .from('shopping_list')
         .update({ bought: true })
-        .match({ id: item.id });
+        .match({ id });
 
+    return checkError(response);
+};
+
+export const deleteAllItems = async() => {
+    const response = await client 
+        .from('shopping_list')
+        .delete();
     return checkError(response);
 };

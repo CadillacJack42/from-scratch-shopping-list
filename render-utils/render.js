@@ -6,7 +6,7 @@ const listContainerEl = document.getElementById('list-container');
 export const renderItem = (item) => {
     const itemDiv = document.createElement('div');
     itemDiv.classList.add('no-margin');
-    
+
     if (item.bought) {
         itemDiv.classList.add('bought');
     }
@@ -34,13 +34,13 @@ export const displayShoppingListItems = async() => {
         const itemEl = renderItem(item);
 
         listContainerEl.append(itemEl);
-        listenerGenerator(itemEl, item);
+        listenerGenerator(itemEl, item.id);
     }
 };
 
-const listenerGenerator = (itemDiv, item) => {
+const listenerGenerator = (itemDiv, id) => {
     itemDiv.addEventListener('click', async() => {
-        await buyItem(item);
+        await buyItem(id);
         await displayShoppingListItems();
     });
 };
