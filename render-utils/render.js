@@ -28,7 +28,7 @@ export const renderItem = (item) => {
     itemNameEl.textContent = item.item;
 
 
-    itemDiv.append(itemQuantityEl, timeEl, itemNameEl);
+    itemDiv.append(itemQuantityEl, itemNameEl, timeEl);
 
     return itemDiv;
 };

@@ -61,9 +61,10 @@ export const isDue = (due_date) => {
         const remainingTime = `${days} : ${hours} : ${minutes} : ${seconds}`;
         timerEl.textContent = remainingTime;
 
-        if (timeRemaining === 0) {
+        if (timeRemaining < 0) {
             clearInterval(checkTime);
             timerEl.textContent = 'OUTTA TIME';
+            timerEl.classList.add('bought');
         }
 
 
