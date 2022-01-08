@@ -156,3 +156,8 @@ footer {
     display: flex;
     flex-direction: row;
 }
+
+#add-item {
+    display: flex;
+    flex-direction: column;
+}

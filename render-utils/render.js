@@ -1,9 +1,12 @@
 import { buyItem, getItems, removeSingleItem } from '../fetch-utils.js';
+import { isDue } from '../timer/timer.js';
+
 
 const listContainerEl = document.getElementById('list-container');
 
 
 export const renderItem = (item) => {
+    console.log(item.due_date);
     const itemDiv = document.createElement('div');
     itemDiv.classList.add('no-margin');
 
@@ -17,12 +20,15 @@ export const renderItem = (item) => {
     
     const itemNameEl = document.createElement('p');
     itemNameEl.classList.add('no-margin');
+
+    const timeEl = document.createElement('div');
+    timeEl.append(isDue(item.due_date));
     
     itemQuantityEl.textContent = item.quantity;
     itemNameEl.textContent = item.item;
 
 
-    itemDiv.append(itemQuantityEl, itemNameEl);
+    itemDiv.append(itemQuantityEl, timeEl, itemNameEl);
 
     return itemDiv;
 };

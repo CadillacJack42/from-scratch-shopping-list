@@ -1,3 +1,6 @@
+import { countDown } from "./timer/timer.js";
+
+
 const SUPABASE_URL = 'https://cmewyjgphfnmytfmmpjy.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MDAxOTY4MywiZXhwIjoxOTU1NTk1NjgzfQ.0WT-gqj-qvV0wYfg0QdblxbkS4J4rIq0wf8BI3R45yc';
 
@@ -45,16 +48,17 @@ export const createItem = async(item) => {
     const response = await client
         .from('shopping_list')
         .insert([item]);
+        
+    // const timerEl = document.createElement('div');
+    // timerEl.append(countDown(5));
+    // arr.push(timerEl);
     return checkError(response);
 };
-
 export const getItems = async() => {
     const response = await client
         .from('shopping_list')
         .select();
-    // for (const res of response.data) {
-    //     console.log(res.created_at);
-    // }
+    console.log(response);
     return checkError(response);
 };
 
@@ -89,25 +93,25 @@ export const removeSingleItem = async(item) => {
     return checkError(response);
 };
 
-const getTime = async() => {
-    const items = await getItems();
-    for (const item of items) {
-        const timeStamp = JSON.stringify(item.created_at);
-        console.log(timeStamp);
-        const cleanTime = [];
-        let places = '';
-        for (let i = 12; i < 17; i++) {
-            const element = timeStamp[i];
-            if (element !== ':') {
-                places += element;
-            } else {
-                cleanTime.push(places);
-                places = '';
-            }
-        }
-        cleanTime.push(places);
-        console.log(cleanTime);
-    }
-};
+// const getTime = async() => {
+//     const items = await getItems();
+//     for (const item of items) {
+//         const timeStamp = JSON.stringify(item.created_at);
+//         console.log(timeStamp);
+//         const cleanTime = [];
+//         let places = '';
+//         for (let i = 12; i < 17; i++) {
+//             const element = timeStamp[i];
+//             if (element !== ':') {
+//                 places += element;
+//             } else {
+//                 cleanTime.push(places);
+//                 places = '';
+//             }
+//         }
+//         cleanTime.push(places);
+//         console.log(cleanTime);
+//     }
+// };
 
 
