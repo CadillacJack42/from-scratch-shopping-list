@@ -147,8 +147,17 @@ footer {
     padding: 5px;
 }
 
-
 .bought {
     text-decoration: line-through;
     background-color: rgb(141, 191, 235);
+}
+
+.item-block {
+    display: flex;
+    flex-direction: row;
+}
+
+#add-item {
+    display: flex;
+    flex-direction: column;
 }
